@@ -37,7 +37,7 @@ export const profile = {
       ],
     },
     education: {
-      school: "Politeknik Negeri Indramayu (PNI)",
+      school: "Politeknik Negeri Indramayu (Polindra)",
       degree: { en: "D4 — Smart City Information Systems", id: "D4 — Sistem Informasi Kota Cerdas" },
       period: "2023 — Present",
       note: {
