@@ -1,35 +1,26 @@
+"use client";
+
 import Container from "@/components/Container";
 import ProjectCard from "@/components/ProjectCard";
+import { useLanguage } from "@/contexts/LanguageContext";
+import { t } from "@/data/translations";
 import { projects } from "@/data/projects";
 
-export const metadata = {
-  title: "Projects — Dary Ibrahim",
-  description: "All projects by Dary Ibrahim Akram.",
-};
-
 export default function ProjectsPage() {
+  const { lang } = useLanguage();
   return (
     <main>
       <section className="section">
         <Container>
-          <div className="label mb-3">All Work</div>
-          <h1
-            className="text-4xl font-bold tracking-[-0.02em] mb-3"
-            style={{ color: "var(--white)" }}
-          >
-            Projects
+          <div className="label mb-3">{t.projects.page_label[lang]}</div>
+          <h1 className="text-5xl font-bold tracking-[-0.02em] mb-4" style={{ color: "var(--white)" }}>
+            {t.projects.page_title[lang]}
           </h1>
-          <p
-            className="text-[15px] leading-7 mb-12 max-w-lg"
-            style={{ color: "var(--text-2)" }}
-          >
-            Shipped demos and workflow apps. Click any card for the full case study.
+          <p className="text-[16px] leading-7 mb-12 max-w-lg" style={{ color: "var(--text-2)" }}>
+            {t.projects.page_desc[lang]}
           </p>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
-            {projects.map((p) => (
-              <ProjectCard key={p.slug} project={p} />
-            ))}
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
+            {projects.map((p) => <ProjectCard key={p.slug} project={p} />)}
           </div>
         </Container>
       </section>

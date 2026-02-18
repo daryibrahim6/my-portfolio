@@ -1,117 +1,107 @@
+"use client";
+
 import Container from "@/components/Container";
 import ProjectCard from "@/components/ProjectCard";
 import ButtonLink from "@/components/ButtonLink";
+import TechIcon from "@/components/TechIcon";
+import { useLanguage } from "@/contexts/LanguageContext";
+import { t } from "@/data/translations";
 import { profile } from "@/data/profile";
 import { projects } from "@/data/projects";
 
 export default function HomePage() {
+  const { lang } = useLanguage();
+
   return (
     <main>
       {/* ── HERO ── */}
       <section className="hero-section">
         <Container>
-          <div className="grid md:grid-cols-[1fr_340px] gap-12 items-start">
+          <div className="grid md:grid-cols-[1fr_320px] gap-14 items-start">
             {/* Left */}
             <div>
-              {/* Availability */}
-              <div className="avail-dot mb-7">
-                {profile.about.availability}
+              <div className="avail-dot mb-8">
+                {profile.about.availability[lang]}
               </div>
 
-              {/* Headline */}
               <h1
-                className="text-5xl md:text-6xl font-bold leading-[1.05] tracking-[-0.03em] mb-6"
+                className="text-6xl md:text-7xl font-bold leading-[1.03] tracking-[-0.03em] mb-5"
                 style={{ color: "var(--white)" }}
               >
                 {profile.name}
               </h1>
 
-              {/* Role */}
               <div
-                className="text-[15px] font-medium mb-5 mono"
+                className="text-[16px] font-medium mb-6 mono"
                 style={{ color: "var(--text-3)" }}
               >
                 {profile.role} · {profile.location}
               </div>
 
-              {/* Tagline */}
               <p
-                className="text-[16px] leading-8 mb-9 max-w-[520px]"
+                className="text-[18px] leading-[1.8] mb-10 max-w-[540px]"
                 style={{ color: "var(--text-2)" }}
               >
-                {profile.tagline}
+                {profile.tagline[lang]}
               </p>
 
-              {/* CTAs */}
-              <div className="flex flex-wrap gap-3 mb-9">
+              <div className="flex flex-wrap gap-3 mb-10">
                 <ButtonLink href="#projects" variant="primary">
-                  View Projects →
+                  {t.hero.cta_projects[lang]}
                 </ButtonLink>
                 <ButtonLink href="/contact" variant="secondary">
-                  Get in Touch
+                  {t.hero.cta_talk[lang]}
                 </ButtonLink>
                 <ButtonLink href="/resume" variant="ghost">
-                  Resume
+                  {t.hero.cta_resume[lang]}
                 </ButtonLink>
               </div>
 
-              {/* Social links */}
-              <div className="flex gap-5 text-[13px]" style={{ color: "var(--text-3)" }}>
+              <div className="flex flex-wrap gap-5 text-[14px]" style={{ color: "var(--text-3)" }}>
                 {profile.links.github && (
-                  <a
-                    href={profile.links.github}
-                    target="_blank" rel="noreferrer"
-                    className="transition-colors hover:text-[var(--text)] mono"
-                  >
+                  <a href={profile.links.github} target="_blank" rel="noreferrer"
+                    className="transition-colors hover:text-[var(--text)] mono">
                     GitHub ↗
                   </a>
                 )}
                 {profile.links.linkedin && (
-                  <a
-                    href={profile.links.linkedin}
-                    target="_blank" rel="noreferrer"
-                    className="transition-colors hover:text-[var(--text)] mono"
-                  >
+                  <a href={profile.links.linkedin} target="_blank" rel="noreferrer"
+                    className="transition-colors hover:text-[var(--text)] mono">
                     LinkedIn ↗
                   </a>
                 )}
-                <a
-                  href={`mailto:${profile.email}`}
-                  className="transition-colors hover:text-[var(--text)] mono"
-                >
+                {profile.links.instagram && (
+                  <a href={profile.links.instagram} target="_blank" rel="noreferrer"
+                    className="transition-colors hover:text-[var(--text)] mono">
+                    Instagram ↗
+                  </a>
+                )}
+                <a href={`mailto:${profile.email}`}
+                  className="transition-colors hover:text-[var(--text)] mono">
                   {profile.email} ↗
                 </a>
               </div>
             </div>
 
-            {/* Right — About card */}
+            {/* Right — About */}
             <div className="space-y-3">
               <div className="card p-6">
-                <div className="label mb-4">About</div>
-                <p
-                  className="text-[13px] leading-7 whitespace-pre-line"
-                  style={{ color: "var(--text-2)" }}
-                >
-                  {profile.about.short}
+                <div className="label mb-4">{t.about.title[lang]}</div>
+                <p className="text-[14px] leading-7 whitespace-pre-line" style={{ color: "var(--text-2)" }}>
+                  {t.about.short[lang]}
                 </p>
               </div>
 
-              {/* Meta grid */}
               <div className="grid grid-cols-2 gap-3">
                 {[
-                  { k: "Focus",     v: profile.about.focus },
-                  { k: "Interest",  v: profile.about.interest },
-                  { k: "Stack",     v: profile.about.stack },
-                  { k: "Projects",  v: `${projects.length} total` },
+                  { k: t.about.focus[lang],        v: profile.about.focus },
+                  { k: t.about.interest[lang],      v: profile.about.interest },
+                  { k: t.about.stack[lang],         v: profile.about.stack },
+                  { k: t.about.projects_lbl[lang],  v: `${projects.length} ${t.about.total[lang]}` },
                 ].map(({ k, v }) => (
                   <div key={k} className="card-flat p-4">
                     <div className="label mb-1">{k}</div>
-                    <div
-                      className="text-[12px] font-medium"
-                      style={{ color: "var(--text)" }}
-                    >
-                      {v}
-                    </div>
+                    <div className="text-[13px] font-medium" style={{ color: "var(--text)" }}>{v}</div>
                   </div>
                 ))}
               </div>
@@ -121,28 +111,19 @@ export default function HomePage() {
       </section>
 
       {/* ── PROJECTS ── */}
-      <section
-        id="projects"
-        className="section scroll-mt-nav"
-        style={{ borderBottom: "1px solid var(--border)" }}
-      >
+      <section id="projects" className="section scroll-mt-nav" style={{ borderBottom: "1px solid var(--border)" }}>
         <Container>
           <div className="flex items-end justify-between mb-10">
             <div>
-              <div className="label mb-3">Selected Work</div>
-              <h2
-                className="text-3xl font-bold tracking-[-0.02em]"
-                style={{ color: "var(--white)" }}
-              >
-                Projects
+              <div className="label mb-3">{t.projects.section_label[lang]}</div>
+              <h2 className="text-4xl font-bold tracking-[-0.02em]" style={{ color: "var(--white)" }}>
+                {t.projects.section_title[lang]}
               </h2>
             </div>
-            <ButtonLink href="/projects" variant="ghost">
-              View all →
-            </ButtonLink>
+            <ButtonLink href="/projects" variant="ghost">{t.projects.view_all[lang]}</ButtonLink>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
             {projects.map((p) => (
               <ProjectCard key={p.slug} project={p} />
             ))}
@@ -153,28 +134,26 @@ export default function HomePage() {
       {/* ── SKILLS ── */}
       <section className="section" style={{ borderBottom: "1px solid var(--border)" }}>
         <Container>
-          <div className="label mb-3">Capabilities</div>
-          <h2
-            className="text-3xl font-bold tracking-[-0.02em] mb-10"
-            style={{ color: "var(--white)" }}
-          >
-            Skills
+          <div className="label mb-3">{t.skills.label[lang]}</div>
+          <h2 className="text-4xl font-bold tracking-[-0.02em] mb-12" style={{ color: "var(--white)" }}>
+            {t.skills.title[lang]}
           </h2>
 
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {(
-              [
-                { title: "Frontend",    items: profile.skills.frontend },
-                { title: "Backend",     items: profile.skills.backend  },
-                { title: "Tools",       items: profile.skills.tools    },
-                { title: "Soft Skills", items: profile.skills.soft     },
-              ] as const
-            ).map(({ title, items }) => (
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
+            {([
+              { title: t.skills.frontend[lang], items: profile.skills.frontend },
+              { title: t.skills.backend[lang],  items: profile.skills.backend },
+              { title: t.skills.tools[lang],    items: profile.skills.tools },
+              { title: t.skills.soft[lang],     items: profile.skills.soft },
+            ] as const).map(({ title, items }) => (
               <div key={title}>
-                <div className="label mb-4">{title}</div>
-                <div className="flex flex-wrap gap-2">
+                <div className="label mb-5">{title}</div>
+                <div className="space-y-2">
                   {items.map((s) => (
-                    <span key={s} className="skill-pill">{s}</span>
+                    <div key={s} className="skill-pill w-full justify-start">
+                      <TechIcon name={s} size={15} />
+                      <span>{s}</span>
+                    </div>
                   ))}
                 </div>
               </div>
@@ -186,30 +165,17 @@ export default function HomePage() {
       {/* ── CTA ── */}
       <section className="section">
         <Container>
-          <div
-            className="max-w-xl mx-auto text-center py-4"
-          >
-            <div className="label mb-4 flex justify-center">Let's Build</div>
-            <h2
-              className="text-3xl font-bold tracking-[-0.02em] mb-4"
-              style={{ color: "var(--white)" }}
-            >
-              Open for New Projects
+          <div className="max-w-lg mx-auto text-center">
+            <div className="label mb-4 flex justify-center">{t.cta.label[lang]}</div>
+            <h2 className="text-4xl font-bold tracking-[-0.02em] mb-4" style={{ color: "var(--white)" }}>
+              {t.cta.title[lang]}
             </h2>
-            <p
-              className="text-[15px] leading-7 mb-8"
-              style={{ color: "var(--text-2)" }}
-            >
-              Available for freelance work, collaborations, and internships.
-              Drop me a line and let's talk.
+            <p className="text-[16px] leading-8 mb-8" style={{ color: "var(--text-2)" }}>
+              {t.cta.desc[lang]}
             </p>
             <div className="flex flex-wrap gap-3 justify-center">
-              <ButtonLink href="/contact" variant="primary">
-                Get in Touch →
-              </ButtonLink>
-              <ButtonLink href={`mailto:${profile.email}`} external variant="secondary">
-                Email Directly
-              </ButtonLink>
+              <ButtonLink href="/contact" variant="primary">{t.cta.btn1[lang]}</ButtonLink>
+              <ButtonLink href={`mailto:${profile.email}`} external variant="secondary">{t.cta.btn2[lang]}</ButtonLink>
             </div>
           </div>
         </Container>
