@@ -2,4 +2,4 @@ User-agent: *
 Allow: /
 
 # Ganti YOUR_DOMAIN dengan domain kamu
-Sitemap: my-portfolio-ga9q3snt9-darys-projects-4f9ae805.vercel.app
+Sitemap: https://daryibrahim.vercel.app/

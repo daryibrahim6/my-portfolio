@@ -2,7 +2,7 @@ import type { MetadataRoute } from "next";
 import { projects } from "@/data/projects";
 
 // Ganti YOUR_DOMAIN dengan domain kamu
-const SITE_URL = "my-portfolio-ga9q3snt9-darys-projects-4f9ae805.vercel.app";
+const SITE_URL = "https://daryibrahim.vercel.app/";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const projectUrls = projects.map((p) => ({
