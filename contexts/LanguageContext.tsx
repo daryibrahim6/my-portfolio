@@ -1,6 +1,6 @@
 "use client";
 
-import { createContext, useContext, useState, useEffect, ReactNode } from "react";
+import { createContext, useContext, useState, ReactNode } from "react";
 import type { Lang } from "@/data/translations";
 
 type LanguageContextType = {
@@ -13,18 +13,24 @@ const LanguageContext = createContext<LanguageContextType>({
   toggle: () => {},
 });
 
-export function LanguageProvider({ children }: { children: ReactNode }) {
-  const [lang, setLang] = useState<Lang>("en");
-
-  useEffect(() => {
-    const saved = localStorage.getItem("lang") as Lang | null;
-    if (saved === "en" || saved === "id") setLang(saved);
-  }, []);
+// initialLang dikirim dari server (layout.tsx baca cookie)
+// Ini yang fix masalah SSR — server render sudah pakai bahasa yang benar
+export function LanguageProvider({
+  children,
+  initialLang = "en",
+}: {
+  children: ReactNode;
+  initialLang?: Lang;
+}) {
+  const [lang, setLang] = useState<Lang>(initialLang);
 
   function toggle() {
     setLang((prev) => {
       const next = prev === "en" ? "id" : "en";
-      localStorage.setItem("lang", next);
+      // Simpan ke cookie (dibaca server saat refresh/navigasi berikutnya)
+      document.cookie = `lang=${next};path=/;max-age=31536000;SameSite=Lax`;
+      // Fix P0: html lang attribute ikut berubah — penting untuk screen reader
+      document.documentElement.lang = next;
       return next;
     });
   }

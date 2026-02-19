@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+# Ganti YOUR_DOMAIN dengan domain kamu
+Sitemap: daryibrahim.vercel.app

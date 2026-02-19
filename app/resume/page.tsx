@@ -2,22 +2,11 @@
 
 import Container from "@/components/Container";
 import ButtonLink from "@/components/ButtonLink";
+import TechIcon from "@/components/TechIcon";
 import FadeIn from "@/components/FadeIn";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { t } from "@/data/translations";
 import { profile } from "@/data/profile";
-
-// Skill proficiency data — edit sesuai keyakinan kamu
-const skillLevels = [
-  { name: "React / Next.js", pct: 92 },
-  { name: "TypeScript",      pct: 92 },
-  { name: "Tailwind CSS",    pct: 92 },
-  { name: "Laravel",         pct: 89 },
-  { name: "MySQL",           pct: 90 },
-  { name: "REST APIs",       pct: 85 },
-  { name: "Git",             pct: 90 },
-  { name: "Python / ML",     pct: 89 },
-];
 
 export default function ResumePage() {
   const { lang } = useLanguage();
@@ -41,6 +30,7 @@ export default function ResumePage() {
 
           <div className="grid lg:grid-cols-[1fr_280px] gap-8 items-start">
             <div className="space-y-5">
+
               {/* Summary */}
               <FadeIn delay={80}>
                 <div className="card p-6">
@@ -71,40 +61,62 @@ export default function ResumePage() {
                 </div>
               </FadeIn>
 
-              {/* Skill proficiency bars */}
+              {/* Tech Stack — grouped tags, ganti skill bars */}
               <FadeIn delay={200}>
                 <div className="card p-6">
-                  <div className="label mb-6">
-                    {lang === "en" ? "Skill Proficiency" : "Tingkat Keahlian"}
-                  </div>
-                  <div className="space-y-4">
-                    {skillLevels.map((sk, i) => (
-                      <div key={sk.name}>
-                        <div className="flex items-center justify-between mb-1.5">
-                          <span className="text-[14px]" style={{ color: "var(--text-2)" }}>{sk.name}</span>
-                          <span className="text-[12px] mono" style={{ color: "var(--text-3)" }}>{sk.pct}%</span>
-                        </div>
-                        <div
-                          className="w-full rounded-full overflow-hidden"
-                          style={{ height: 5, background: "var(--surface3)" }}
-                        >
-                          <div
-                            className="h-full rounded-full skill-bar"
-                            style={{
-                              width: `${sk.pct}%`,
-                              background: "var(--white)",
-                              opacity: 0.7 + (sk.pct / 100) * 0.3,
-                              animationDelay: `${i * 80}ms`,
-                            }}
-                          />
-                        </div>
+                  <div className="label mb-6">{t.resume.tech_stack[lang]}</div>
+
+                  <div className="space-y-5">
+                    {/* Primary */}
+                    <div>
+                      <div className="label mb-3" style={{ color: "var(--text-2)" }}>
+                        {t.skills.primary[lang]}
                       </div>
-                    ))}
+                      <div className="flex flex-wrap gap-2">
+                        {profile.techGroups.primary.map((s) => (
+                          <span key={s} className="skill-pill skill-pill-primary">
+                            <TechIcon name={s} size={14} />
+                            {s}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* Secondary */}
+                    <div>
+                      <div className="label mb-3" style={{ color: "var(--text-2)" }}>
+                        {t.skills.secondary[lang]}
+                      </div>
+                      <div className="flex flex-wrap gap-2">
+                        {profile.techGroups.secondary.map((s) => (
+                          <span key={s} className="skill-pill">
+                            <TechIcon name={s} size={14} />
+                            {s}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* Learning */}
+                    <div>
+                      <div className="label mb-3" style={{ color: "var(--text-2)" }}>
+                        {t.skills.learning[lang]}
+                      </div>
+                      <div className="flex flex-wrap gap-2">
+                        {profile.techGroups.learning.map((s) => (
+                          <span key={s} className="skill-pill skill-pill-dim">
+                            <TechIcon name={s} size={14} />
+                            {s}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
                   </div>
+
                   <p className="text-[12px] mono mt-5" style={{ color: "var(--text-4)" }}>
                     {lang === "en"
-                      ? "Self-assessed — updated periodically"
-                      : "Penilaian mandiri — diperbarui berkala"}
+                      ? "Grouped by daily use — not by arbitrary percentages."
+                      : "Dikelompokkan berdasarkan penggunaan harian — bukan persentase arbitrary."}
                   </p>
                 </div>
               </FadeIn>

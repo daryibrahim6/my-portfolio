@@ -5,8 +5,9 @@ export const profile = {
   email: "daryibrahimakram@gmail.com",
 
   tagline: {
-    en: "I build interfaces that feel right and systems that hold up — frontend-first, with enough backend knowledge to ship end-to-end.",
-    id: "Saya membangun antarmuka yang terasa tepat dan sistem yang kuat — fokus di frontend, dengan cukup pengetahuan backend untuk ship dari ujung ke ujung.",
+    // Rewrite: konkret, ada bukti nyata di kalimat pertama
+    en: "Currently leading DonorDermayu — a fullstack workflow system for PMI Indramayu. Frontend-first, but I own the full stack when needed.",
+    id: "Saat ini memimpin DonorDermayu — sistem workflow fullstack untuk PMI Indramayu. Fokus frontend, tapi saya tangani full stack saat dibutuhkan.",
   },
 
   about: {
@@ -21,6 +22,13 @@ export const profile = {
     backend:  ["Laravel", "Node.js", "Express", "MySQL", "REST APIs"],
     tools:    ["Git", "Figma", "VS Code", "Postman", "Docker"],
     soft:     ["System Thinking", "Team Leadership", "Problem Solving", "Agile"],
+  },
+
+  // Grouped tech — lebih jujur dari persentase, lebih mudah di-scan recruiter
+  techGroups: {
+    primary:   ["React", "Next.js", "TypeScript", "Tailwind CSS"],
+    secondary: ["Laravel", "MySQL", "REST APIs", "Node.js"],
+    learning:  ["Python", "YOLOv8", "Computer Vision"],
   },
 
   resume: {
