@@ -73,7 +73,7 @@ export default function HomePage() {
             <div className="hidden md:flex justify-center">
               <div className="avatar-wrap">
                 <Image
-                  src="/images/avatar.png"
+                  src="/images/avatar.webp"
                   alt={profile.name}
                   fill
                   className="object-cover object-top"

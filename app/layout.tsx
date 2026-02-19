@@ -20,7 +20,7 @@ const dmMono = DM_Mono({
 });
 
 // Ganti YOUR_DOMAIN dengan domain Vercel kamu, contoh: daryibrahim.vercel.app
-const SITE_URL = "https://daryibrahim.vercel.app/";
+const SITE_URL = "https://daryibrahim.vercel.app";
 
 export const metadata: Metadata = {
   title: "Dary Ibrahim — Frontend Developer",
