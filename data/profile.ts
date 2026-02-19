@@ -69,7 +69,7 @@ export const profile = {
 
   links: {
     github:    "https://github.com/daryibrahim6",
-    linkedin:  "https://linkedin.com/in/dary-ibrahim-akram",
+    linkedin:  "https://www.linkedin.com/in/dary-ibrahim-akram-b3253734a/",
     instagram: "https://www.instagram.com/daryibrahim.a",
     whatsapp:  "",
   },
