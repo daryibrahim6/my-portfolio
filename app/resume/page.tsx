@@ -45,7 +45,7 @@ export default function ResumePage() {
                   <div className="font-semibold text-[16px] mb-1" style={{ color: "var(--white)" }}>{edu.school}</div>
                   <div className="text-[14px] mb-1 mono" style={{ color: "var(--text-2)" }}>{edu.degree[lang]}</div>
                   <div className="label mb-2">{edu.period}</div>
-                  <p className="text-[14px] leading-6" style={{ color: "var(--text-2)" }}>{edu.note[lang]}</p>
+                  <p className="text-[15px] leading-7" style={{ color: "var(--text-2)" }}>{edu.note[lang]}</p>
                 </div>
               </div>
 
@@ -67,8 +67,8 @@ export default function ResumePage() {
             <div className="space-y-4">
               <div className="card p-6">
                 <div className="label mb-4">{t.resume.download[lang]}</div>
-                <p className="text-[14px] leading-6 mb-5" style={{ color: "var(--text-2)" }}>
-                  {t.resume.dl_note[lang]} <code className="code-tag">/public/resume.pdf</code>
+                <p className="text-[15px] leading-7 mb-6" style={{ color: "var(--text-2)" }}>
+                  {t.resume.dl_note[lang]}
                 </p>
                 <div className="flex flex-col gap-2">
                   <ButtonLink href="/resume.pdf" external variant="primary">{t.resume.dl_btn[lang]}</ButtonLink>

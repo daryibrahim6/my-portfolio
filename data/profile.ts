@@ -11,8 +11,8 @@ export const profile = {
 
   about: {
     focus:        "Frontend Engineering",
-    interest:     "Computer Vision",
-    stack:        "Next.js · Laravel · MySQL",
+    interest:     "AI / Computer Vision",
+    stack:        "Next.js · TypeScript · Tailwind CSS",
     availability: { en: "Open for opportunities", id: "Terbuka untuk peluang" },
   },
 

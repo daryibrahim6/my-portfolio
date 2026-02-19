@@ -41,7 +41,7 @@ export default function ContactPage() {
                 </div>
               </div>
               <div className="card p-6 text-center">
-                <p className="text-[14px] leading-7 mb-5" style={{ color: "var(--text-2)" }}>
+                <p className="text-[15px] leading-7 mb-5" style={{ color: "var(--text-2)" }}>
                   {t.contact.browse_first[lang]}
                 </p>
                 <ButtonLink href="/projects" variant="secondary">{t.contact.view_projects[lang]}</ButtonLink>
@@ -59,7 +59,7 @@ function ConnectRow({ label, value, href, ext }: { label: string; value: string;
     <a className="connect-row" href={href} target={ext ? "_blank" : undefined} rel={ext ? "noreferrer" : undefined}>
       <div className="min-w-0">
         <div className="label mb-0.5">{label}</div>
-        <div className="text-[14px] font-medium truncate" style={{ color: "var(--text)" }}>{value}</div>
+        <div className="text-[15px] font-medium truncate" style={{ color: "var(--text)" }}>{value}</div>
       </div>
       <span className="btn ghost sm flex-shrink-0">Open ↗</span>
     </a>

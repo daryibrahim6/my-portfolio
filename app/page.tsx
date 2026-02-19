@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Container from "@/components/Container";
 import ProjectCard from "@/components/ProjectCard";
 import ButtonLink from "@/components/ButtonLink";
@@ -17,8 +18,8 @@ export default function HomePage() {
       {/* ── HERO ── */}
       <section className="hero-section">
         <Container>
-          <div className="grid md:grid-cols-[1fr_320px] gap-14 items-start">
-            {/* Left */}
+          <div className="grid md:grid-cols-[1fr_280px] gap-14 items-center">
+            {/* Left — text */}
             <div>
               <div className="avail-dot mb-8">
                 {profile.about.availability[lang]}
@@ -32,7 +33,7 @@ export default function HomePage() {
               </h1>
 
               <div
-                className="text-[16px] font-medium mb-6 mono"
+                className="text-[17px] font-medium mb-6 mono"
                 style={{ color: "var(--text-3)" }}
               >
                 {profile.role} · {profile.location}
@@ -57,24 +58,18 @@ export default function HomePage() {
                 </ButtonLink>
               </div>
 
-              <div className="flex flex-wrap gap-5 text-[14px]" style={{ color: "var(--text-3)" }}>
+              <div className="flex flex-wrap gap-5 text-[15px]" style={{ color: "var(--text-3)" }}>
                 {profile.links.github && (
                   <a href={profile.links.github} target="_blank" rel="noreferrer"
-                    className="transition-colors hover:text-[var(--text)] mono">
-                    GitHub ↗
-                  </a>
+                    className="transition-colors hover:text-[var(--text)] mono">GitHub ↗</a>
                 )}
                 {profile.links.linkedin && (
                   <a href={profile.links.linkedin} target="_blank" rel="noreferrer"
-                    className="transition-colors hover:text-[var(--text)] mono">
-                    LinkedIn ↗
-                  </a>
+                    className="transition-colors hover:text-[var(--text)] mono">LinkedIn ↗</a>
                 )}
                 {profile.links.instagram && (
                   <a href={profile.links.instagram} target="_blank" rel="noreferrer"
-                    className="transition-colors hover:text-[var(--text)] mono">
-                    Instagram ↗
-                  </a>
+                    className="transition-colors hover:text-[var(--text)] mono">Instagram ↗</a>
                 )}
                 <a href={`mailto:${profile.email}`}
                   className="transition-colors hover:text-[var(--text)] mono">
@@ -83,28 +78,81 @@ export default function HomePage() {
               </div>
             </div>
 
-            {/* Right — About */}
-            <div className="space-y-3">
-              <div className="card p-6">
-                <div className="label mb-4">{t.about.title[lang]}</div>
-                <p className="text-[14px] leading-7 whitespace-pre-line" style={{ color: "var(--text-2)" }}>
-                  {t.about.short[lang]}
-                </p>
+            {/* Right — Photo */}
+            <div className="hidden md:flex justify-center">
+              <div className="avatar-wrap">
+                {/* Taruh foto kamu di /public/images/avatar.png */}
+                <Image
+                  src="/images/avatar.png"
+                  alt={profile.name}
+                  fill
+                  className="object-cover object-top"
+                  sizes="280px"
+                  priority
+                />
               </div>
+            </div>
+          </div>
+        </Container>
+      </section>
 
-              <div className="grid grid-cols-2 gap-3">
-                {[
-                  { k: t.about.focus[lang],        v: profile.about.focus },
-                  { k: t.about.interest[lang],      v: profile.about.interest },
-                  { k: t.about.stack[lang],         v: profile.about.stack },
-                  { k: t.about.projects_lbl[lang],  v: `${projects.length} ${t.about.total[lang]}` },
-                ].map(({ k, v }) => (
-                  <div key={k} className="card-flat p-4">
-                    <div className="label mb-1">{k}</div>
-                    <div className="text-[13px] font-medium" style={{ color: "var(--text)" }}>{v}</div>
-                  </div>
+      {/* ── ABOUT ── */}
+      <section className="section" style={{ borderBottom: "1px solid var(--border)" }}>
+        <Container>
+          <div className="grid md:grid-cols-[1fr_300px] gap-12 items-start">
+            {/* Left — about text */}
+            <div>
+              <div className="label mb-3">{t.about.section_label[lang]}</div>
+              <h2
+                className="text-4xl font-bold tracking-[-0.02em] mb-8"
+                style={{ color: "var(--white)" }}
+              >
+                {t.about.section_title[lang]}
+              </h2>
+
+              <div className="space-y-5">
+                {t.about.short[lang].split("\n\n").map((para, i) => (
+                  <p
+                    key={i}
+                    className="text-[16px] leading-8"
+                    style={{ color: "var(--text-2)" }}
+                  >
+                    {para}
+                  </p>
                 ))}
               </div>
+
+              {/* Signature */}
+              <div className="mt-8 pt-6" style={{ borderTop: "1px solid var(--border)" }}>
+                <p className="text-[14px] mb-1" style={{ color: "var(--text-3)" }}>
+                  {lang === "en" ? "Best regards," : "Salam,"}
+                </p>
+                <p
+                  className="text-[28px] font-bold tracking-[-0.02em]"
+                  style={{
+                    color: "var(--text)",
+                    fontFamily: "Georgia, 'Times New Roman', serif",
+                    fontStyle: "italic",
+                  }}
+                >
+                  Dary
+                </p>
+              </div>
+            </div>
+
+            {/* Right — meta cards */}
+            <div className="grid grid-cols-2 gap-3 md:pt-16">
+              {[
+                { k: t.about.focus[lang],       v: profile.about.focus },
+                { k: t.about.interest[lang],    v: profile.about.interest },
+                { k: t.about.stack[lang],       v: profile.about.stack },
+                { k: t.about.projects_lbl[lang],v: `${projects.length} ${t.about.total[lang]}` },
+              ].map(({ k, v }) => (
+                <div key={k} className="card-flat p-5">
+                  <div className="label mb-2">{k}</div>
+                  <div className="text-[14px] font-medium leading-6" style={{ color: "var(--text)" }}>{v}</div>
+                </div>
+              ))}
             </div>
           </div>
         </Container>
@@ -122,11 +170,8 @@ export default function HomePage() {
             </div>
             <ButtonLink href="/projects" variant="ghost">{t.projects.view_all[lang]}</ButtonLink>
           </div>
-
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
-            {projects.map((p) => (
-              <ProjectCard key={p.slug} project={p} />
-            ))}
+            {projects.map((p) => <ProjectCard key={p.slug} project={p} />)}
           </div>
         </Container>
       </section>
@@ -138,7 +183,6 @@ export default function HomePage() {
           <h2 className="text-4xl font-bold tracking-[-0.02em] mb-12" style={{ color: "var(--white)" }}>
             {t.skills.title[lang]}
           </h2>
-
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
             {([
               { title: t.skills.frontend[lang], items: profile.skills.frontend },
@@ -170,7 +214,7 @@ export default function HomePage() {
             <h2 className="text-4xl font-bold tracking-[-0.02em] mb-4" style={{ color: "var(--white)" }}>
               {t.cta.title[lang]}
             </h2>
-            <p className="text-[16px] leading-8 mb-8" style={{ color: "var(--text-2)" }}>
+            <p className="text-[17px] leading-8 mb-8" style={{ color: "var(--text-2)" }}>
               {t.cta.desc[lang]}
             </p>
             <div className="flex flex-wrap gap-3 justify-center">
